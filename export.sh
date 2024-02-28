@@ -3,9 +3,8 @@ docker run -it -v $(pwd):/usr/app/out --rm nevermendel/leetcode-export --only-la
 
 
 find . -name "*.html" -type f | while read filename; do
-    newfilename=readme.md
+    dir=$(dirname "$filename")
+    newfilename="$dir/readme.md"
     pandoc "$filename" -o "$newfilename"
-    echo "Конвертировано: $filename -> $newfilename"
+    rm -rf $filename
 done
-
-
